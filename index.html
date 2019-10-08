@@ -1,7 +1,8 @@
 <html>
     <head>
-        <title>Acme Pixels</title>
+        <title>strange-stretch.surge</title>
         <link rel='stylesheet' href='styles.css'>
+        <link href="https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap" rel='stylesheet'>
     </head>
     <body>
         <h1>Acme Pixels</h1>
@@ -30,20 +31,60 @@
         <script>
 
             const body = document.querySelector('body');
+            const buttonControls = document.querySelector('#button-container');
+            const swatches = document.querySelector('#swatches');
+            const grid = document.querySelector('#grid');
+            const parameter = {
+                x: 5,
+                y: 5,
+            }
+            const activeColor = {
+                color: ''
+            }
 
-            const generateNxN = n => {
+            buttonControls.addEventListener('click', ev => {
+                ev.preventDefault();
+                switch(ev.target.id) {
+                    case 'add-a-row': 
+                    parameter.y++;
+                    break;
+                    case 'remove-row':
+                    parameter.y--;
+                    break;
+                    case 'add-a-column':
+                    parameter.x++;
+                    break;
+                    case 'remove-column':
+                    parameter.x--;
+                    break;
+                }
+                const createGrid = generateNxN(parameter.x, parameter.y)
+                generateHTMLGrid(createGrid);
+            })
+
+            swatches.addEventListener('click', ev => {
+                ev.preventDefault();
+                activeColor.color = ev.target.classList[0];
+                console.log(activeColor);
+            });
+
+            const generateNxN = (x, y) => {
                 let grid = [];
-                for(let i = n; i > 0; i--) {
+                for(let i = x; i > 0; i--) {
                     let innerGrid = [];
-                    for(let j = n; j > 0; j--){
-                        let cell = Math.ceil(Math.random() * 4);
-                        if(cell == 1) innerGrid.push('red')
-                        if(cell == 2) innerGrid.push('blue')
-                        if(cell == 3) innerGrid.push('green')
-                        if(cell == 4) innerGrid.push('')
+                    for(let j = y; j > 0; j--){
+                        innerGrid.push('');
+                        // let cell = Math.ceil(Math.random() * 6);
+                        // if(cell == 1) innerGrid.push('red')
+                        // if(cell == 2) innerGrid.push('#000FF')
+                        // if(cell == 3) innerGrid.push('green')
+                        // if(cell == 4) innerGrid.push('yellow')
+                        // if(cell == 5) innerGrid.push('teal')
+                        // if(cell == 6) innerGrid.push('')
                     }
                     grid.push(innerGrid);
                 }
+                console.log(grid);
                 return grid;
             }
 
@@ -59,8 +100,17 @@
                 `}).join('')
                 grid.innerHTML = html;
             }
-            const meow = generateNxN(5)
+
+            const meow = generateNxN(parameter.x, parameter.y)
             generateHTMLGrid(meow);
+
+            grid.addEventListener('click', ev => {
+                if(ev.target.style.backgroundColor == activeColor.color) {
+                    ev.target.style.backgroundColor = 'transparent';
+                } else {
+                ev.target.style.backgroundColor = activeColor.color;
+                }
+            })
 
         </script>
     </body>

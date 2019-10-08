@@ -1,18 +1,13 @@
-h1 {
-    font-family: sans-serif;
-    text-align: center;
-}
-
-h2 {
-    font-family: Strata, sans-serif;
+body {
+    font-family: 'Chakra Petch', sans-serif;
 }
 
 #main-container {
     display: flex;
+    border: 1px solid black;
 }
 
 #grid {
-    padding-top: 2rem;
     display: flex;
     justify-content: center;
 }
@@ -24,6 +19,7 @@ h2 {
 }
 
 #controls {
+    background-color: #eee;
     width: 50%;
     padding: 1rem;
 }
@@ -35,8 +31,10 @@ h2 {
 
 button {
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
     height: 2rem;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 #swatches {
@@ -54,7 +52,7 @@ button {
 }
 
 .indigo {
-    background-color: #0000FF;
+    background-color: indigo;
 }
 
 .green {
@@ -67,4 +65,10 @@ button {
 
 .teal {
     background-color: teal;
+}
+
+#canvas {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
 }
